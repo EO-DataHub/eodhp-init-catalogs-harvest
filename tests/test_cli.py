@@ -1,7 +1,9 @@
-from unittest.mock import patch, MagicMock
-from init_catalogs.__main__ import cli
-from click.testing import CliRunner
 import json
+from unittest.mock import MagicMock, patch
+
+from click.testing import CliRunner
+
+from init_catalogs.__main__ import cli
 
 
 # @patch('click.Context')

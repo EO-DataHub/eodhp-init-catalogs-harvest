@@ -2,12 +2,9 @@ import json
 import logging
 import os
 import time
-from random import choice
-from string import ascii_uppercase
 
 import pulsar
 import pulsar.exceptions
-
 
 # create logger for stac fastapi ingester
 logger = logging.getLogger()
@@ -31,7 +28,7 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
-def cli(ctx_dict):
+def cli(ctx_dict: dict):
     """
     Publish message to Pulsar broker.
     """
