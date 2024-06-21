@@ -1,7 +1,6 @@
 import json
 from unittest.mock import MagicMock, patch
 
-from click.testing import CliRunner
 
 from init_catalogs.__main__ import cli
 
@@ -11,8 +10,8 @@ from init_catalogs.__main__ import cli
 @patch("pulsar.Client")
 def test_cli(mock_client_class, mock_getenv):
     # Create variables
-    ctx_dict = {"CLIENT": None, "TOPIC": None}
     test_topic = "harvested"
+
     # Create mocks
     mock_producer = MagicMock()
     mock_client = MagicMock()
@@ -25,16 +24,11 @@ def test_cli(mock_client_class, mock_getenv):
         harvested_dict = json.load(f)
     expected_message = json.dumps(harvested_dict)
 
-    runner = CliRunner()
-    result = cli(ctx_dict)
+    cli()
 
     ##############
     # Assertions #
     ##############
-
-    # Check values set correctly
-    assert ctx_dict["CLIENT"] == mock_client
-    assert ctx_dict["TOPIC"] == test_topic
 
     # Check create_producer is only called once with the expected inputs
     mock_client.create_producer.assert_called_once_with(

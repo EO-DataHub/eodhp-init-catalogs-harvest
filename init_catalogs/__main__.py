@@ -28,19 +28,16 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
-def cli(ctx_dict: dict):
+def cli():
     """
     Publish message to Pulsar broker.
     """
     pulsar_url = os.getenv("PULSAR_URL", "")
-    ctx_dict["CLIENT"] = pulsar.Client(pulsar_url)
-    ctx_dict["TOPIC"] = "harvested"
-    logger.info(f"""Connecting to broker '{pulsar_url}' with topic '{ctx_dict["TOPIC"]}'""")
+    client: pulsar.Client = pulsar.Client(pulsar_url)
+    topic: str = "harvested"
+    logger.info(f"""Connecting to broker '{pulsar_url}' with topic '{topic}'""")
 
     prefix = "intial-workspace-harvest"
-
-    client: pulsar.Client = ctx_dict["CLIENT"]
-    topic: str = ctx_dict["TOPIC"]
 
     producer: pulsar.Producer = client.create_producer(topic=topic, producer_name=prefix)
 
@@ -50,7 +47,7 @@ def cli(ctx_dict: dict):
 
     try:
         msg = harvested_string
-        logger.info(f"Publishing message")
+        logger.info("Publishing message")
         logger.info(msg)
         producer.send(msg.encode("utf-8"))
     finally:
@@ -59,4 +56,4 @@ def cli(ctx_dict: dict):
 
 
 if __name__ == "__main__":
-    cli(ctx_dict={})
+    cli()
