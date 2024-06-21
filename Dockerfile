@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 COPY /init_catalogs /app/init_catalogs
 
-CMD ["python", "-m", "init-catalogs"]
+CMD ["python", "-m", "init_catalogs"]
