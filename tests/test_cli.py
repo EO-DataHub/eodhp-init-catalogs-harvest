@@ -1,7 +1,6 @@
 import json
 from unittest.mock import MagicMock, patch
 
-
 from init_catalogs.__main__ import cli
 
 
