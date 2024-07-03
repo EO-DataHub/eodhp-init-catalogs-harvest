@@ -5,6 +5,8 @@ RUN apt-get update && \
 
 WORKDIR /app
 
+COPY init-catalogs.json /app/init-catalogs.json
+
 COPY requirements.txt /app
 
 RUN pip install -r requirements.txt
