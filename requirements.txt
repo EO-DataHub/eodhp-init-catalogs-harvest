@@ -4,9 +4,9 @@
 #
 #    pip-compile
 #
-certifi==2024.2.2
+certifi==2024.7.4
     # via
     #   eodhp-init-catalogs-harvest (pyproject.toml)
     #   pulsar-client
-pulsar-client==3.4.0
+pulsar-client==3.5.0
     # via eodhp-init-catalogs-harvest (pyproject.toml)
