@@ -3,7 +3,7 @@
     "workspace": "default_workspace",
     "repository": "",
     "branch": "main",
-    "bucket_name": "eodhp-dev-catalogue-population",
+    "bucket_name": "{{BUCKET_NAME}}",
     "updated_keys": [],
     "added_keys": [
         "git-harvester/supported-datasets.json",
