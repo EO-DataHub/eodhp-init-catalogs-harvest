@@ -5,9 +5,9 @@ from init_catalogs.__main__ import cli
 
 
 # @patch('click.Context')
-@patch("os.getenv")
 @patch("pulsar.Client")
-def test_cli(mock_client_class, mock_getenv):
+@patch.dict("os.environ", {"BUCKET_NAME": "test-bucket", "PULSAR_URL": "pulsar://localhost:6650"})
+def test_cli(mock_client_class):
     # Create variables
     test_topic = "harvested"
 
@@ -16,11 +16,12 @@ def test_cli(mock_client_class, mock_getenv):
     mock_client = MagicMock()
     mock_client.create_producer.return_value = mock_producer
     mock_client_class.return_value = mock_client
-    mock_getenv.return_value = "pulsar://localhost:6650"
 
     # Load expected message output data
     with open("init-catalogs.json") as f:
         harvested_dict = json.load(f)
+        harvested_dict["bucket_name"] = "test-bucket"
+
     expected_message = json.dumps(harvested_dict)
 
     cli()

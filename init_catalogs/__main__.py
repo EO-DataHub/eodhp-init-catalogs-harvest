@@ -43,6 +43,7 @@ def cli():
 
     with open("init-catalogs.json") as f:
         harvested_dict = json.load(f)
+        harvested_dict["bucket_name"] = os.getenv("BUCKET_NAME", "")
     harvested_string = json.dumps(harvested_dict)
 
     try:
