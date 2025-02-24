@@ -6,8 +6,9 @@
     "bucket_name": "{{BUCKET_NAME}}",
     "updated_keys": [],
     "added_keys": [
-        "git-harvester/supported-datasets.json",
-        "git-harvester/user-datasets.json"
+        "{ROOT_KEY_PATH}/public.json",
+        "{ROOT_KEY_PATH}/commercial.json",
+        "{ROOT_KEY_PATH}/user.json"
     ],
     "deleted_keys": [],
     "source": "/",
