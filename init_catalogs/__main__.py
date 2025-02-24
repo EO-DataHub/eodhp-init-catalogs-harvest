@@ -80,7 +80,7 @@ def cli():
     # First create the catalogs in S3
     create_catalogs()
 
-    with open("init-catalogs.json") as f:
+    with open("message.json") as f:
         harvested_dict = json.load(f)
         harvested_dict["bucket_name"] = os.getenv("BUCKET_NAME", "")
         harvested_dict["added_keys"] = [
