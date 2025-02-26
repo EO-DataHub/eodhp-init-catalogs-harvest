@@ -7,7 +7,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 
 WORKDIR /app
 
-COPY init-catalogs.json /app/init-catalogs.json
+COPY data /app/data
 
 COPY requirements.txt /app
 

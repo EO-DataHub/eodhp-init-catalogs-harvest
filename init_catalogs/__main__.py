@@ -43,7 +43,7 @@ def create_catalogs():
     bucket_name = os.getenv("BUCKET_NAME", "")
 
     # Get files from folder
-    for root, _, files in os.walk("catalogs"):
+    for root, _, files in os.walk("data/catalogs"):
         for file in files:
             file_path = os.path.join(root, file)
             file_name = os.path.basename(file_path)
@@ -80,7 +80,7 @@ def cli():
     # First create the catalogs in S3
     create_catalogs()
 
-    with open("message.json") as f:
+    with open("data/message.json") as f:
         harvested_dict = json.load(f)
         harvested_dict["bucket_name"] = os.getenv("BUCKET_NAME", "")
         harvested_dict["added_keys"] = [
