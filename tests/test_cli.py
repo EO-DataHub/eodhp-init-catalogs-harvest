@@ -20,13 +20,6 @@ def s3_bucket():
 
 
 def test_create_catalogs(s3_bucket, tmpdir):
-    # Create a temporary directory and files to simulate the catalogs folder
-    # catalogs_dir = tmpdir.mkdir("catalogs")
-    # file1 = catalogs_dir.join("file1.txt")
-    # file2 = catalogs_dir.join("file2.txt")
-    # file1.write("content of file1")
-    # file2.write("content of file2")
-
     # Set the ROOT_KEY_PATH environment variable
     root_key_path = os.getenv("ROOT_KEY_PATH", "git-harvester")
 
