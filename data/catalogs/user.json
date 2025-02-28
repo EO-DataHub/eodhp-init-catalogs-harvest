@@ -2,7 +2,7 @@
     "type": "Catalog",
     "id": "user",
     "title": "User Datasets",
-    "description": "A catalog of EODHP user workspace catalogues",
+    "description": "A catalog of EODHP user workspace catalogs",
     "stac_version": "1.0.0",
     "conformsTo": [],
     "links": [],

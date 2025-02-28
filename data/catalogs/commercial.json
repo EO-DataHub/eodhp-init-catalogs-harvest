@@ -2,7 +2,7 @@
     "type": "Catalog",
     "id": "commercial",
     "title": "Commercial Datasets",
-    "description": "A catalog of EODHP commercial catalogues",
+    "description": "A catalog of EODHP commercial catalogs",
     "stac_version": "1.0.0",
     "conformsTo": [],
     "links": [],

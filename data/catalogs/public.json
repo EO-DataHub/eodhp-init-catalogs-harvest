@@ -2,7 +2,7 @@
     "type": "Catalog",
     "id": "public",
     "title": "Public Datasets",
-    "description": "A catalog of EODHP public catalogues",
+    "description": "A catalog of EODHP public catalogs",
     "stac_version": "1.0.0",
     "conformsTo": [],
     "links": [],
