@@ -47,7 +47,7 @@ def create_catalogs():
         for file in files:
             file_path = os.path.join(root, file)
             file_name = os.path.basename(file_path)
-            key = ROOT_KEY_PATH + "/" + file_name
+            key = ROOT_KEY_PATH + "/catalogs/" + file_name
             logger.info(f"Uploading file '{file_path}' to bucket '{bucket_name}' with key '{key}'")
             try:
                 s3_client.head_object(Bucket=bucket_name, Key=key)
