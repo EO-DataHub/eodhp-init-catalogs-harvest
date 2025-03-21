@@ -6,9 +6,9 @@
     "bucket_name": "{{BUCKET_NAME}}",
     "updated_keys": [],
     "added_keys": [
-        "{ROOT_KEY_PATH}/public.json",
-        "{ROOT_KEY_PATH}/commercial.json",
-        "{ROOT_KEY_PATH}/user.json"
+        "{ROOT_KEY_PATH}/catalogs/public.json",
+        "{ROOT_KEY_PATH}/catalogs/commercial.json",
+        "{ROOT_KEY_PATH}/catalogs/user.json"
     ],
     "deleted_keys": [],
     "source": "/",

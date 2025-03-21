@@ -31,9 +31,9 @@ def test_create_catalogs(s3_bucket, tmpdir):
     uploaded_files = s3.list_objects_v2(Bucket=s3_bucket)["Contents"]
     uploaded_keys = [file["Key"] for file in uploaded_files]
 
-    assert f"{root_key_path}/public.json" in uploaded_keys
-    assert f"{root_key_path}/commercial.json" in uploaded_keys
-    assert f"{root_key_path}/user.json" in uploaded_keys
+    assert f"{root_key_path}/catalogs/public.json" in uploaded_keys
+    assert f"{root_key_path}/catalogs/commercial.json" in uploaded_keys
+    assert f"{root_key_path}/catalogs/user.json" in uploaded_keys
 
 
 # @patch('click.Context')
@@ -60,9 +60,9 @@ def test_cli(mock_client_class, mock_create_catalogs):
         "bucket_name": "test-bucket",
         "updated_keys": [],
         "added_keys": [
-            "git-harvester/public.json",
-            "git-harvester/commercial.json",
-            "git-harvester/user.json",
+            "git-harvester/catalogs/public.json",
+            "git-harvester/catalogs/commercial.json",
+            "git-harvester/catalogs/user.json",
         ],
         "deleted_keys": [],
         "source": "/",
