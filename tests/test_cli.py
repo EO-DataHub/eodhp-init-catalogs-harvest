@@ -1,5 +1,6 @@
 import json
 import os
+from collections.abc import Generator
 from unittest.mock import MagicMock, patch
 
 import boto3
@@ -10,7 +11,7 @@ from init_catalogs.__main__ import cli, create_catalogs
 
 
 @pytest.fixture
-def s3_bucket():
+def s3_bucket() -> Generator[str]:
     with mock_aws():
         s3 = boto3.client("s3", region_name="us-east-1")
         bucket_name = "test-bucket"
@@ -19,7 +20,7 @@ def s3_bucket():
         yield bucket_name
 
 
-def test_create_catalogs(s3_bucket, tmpdir):
+def test_create_catalogs(s3_bucket: str, tmpdir: str) -> None:
     # Set the ROOT_KEY_PATH environment variable
     root_key_path = os.getenv("ROOT_KEY_PATH", "git-harvester")
 
@@ -36,11 +37,10 @@ def test_create_catalogs(s3_bucket, tmpdir):
     assert f"{root_key_path}/catalogs/user.json" in uploaded_keys
 
 
-# @patch('click.Context')
 @patch("init_catalogs.__main__.create_catalogs")
 @patch("pulsar.Client")
 @patch.dict("os.environ", {"BUCKET_NAME": "test-bucket", "PULSAR_URL": "pulsar://localhost:6650"})
-def test_cli(mock_client_class, mock_create_catalogs):
+def test_cli(mock_client_class: MagicMock, mock_create_catalogs: MagicMock) -> None:
     # Create variables
     test_topic = "harvested"
 
@@ -78,9 +78,7 @@ def test_cli(mock_client_class, mock_create_catalogs):
     ##############
 
     # Check create_producer is only called once with the expected inputs
-    mock_client.create_producer.assert_called_once_with(
-        topic=test_topic, producer_name="intial-workspace-harvest"
-    )
+    mock_client.create_producer.assert_called_once_with(topic=test_topic, producer_name="intial-workspace-harvest")
 
     # Check send is only called once with the expected output message
     mock_producer.send.assert_called_once_with(expected_message.encode("utf-8"))

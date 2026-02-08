@@ -33,7 +33,7 @@ logger.addHandler(ch)
 ROOT_KEY_PATH = os.getenv("ROOT_KEY_PATH", "git-harvester")
 
 
-def create_catalogs():
+def create_catalogs() -> None:
     """
     Create initial catalogs for the workspace.
     """
@@ -55,16 +55,12 @@ def create_catalogs():
             except ClientError as e:
                 if e.response["Error"]["Code"] == "404":
                     s3_client.upload_file(file_path, bucket_name, key)
-                    logger.info(
-                        f"File '{file_path}' uploaded to bucket '{bucket_name}' with key '{key}'"
-                    )
+                    logger.info(f"File '{file_path}' uploaded to bucket '{bucket_name}' with key '{key}'")
                 else:
-                    logger.error(
-                        f"Error checking if file '{key}' exists in bucket '{bucket_name}': {e}"
-                    )
+                    logger.error(f"Error checking if file '{key}' exists in bucket '{bucket_name}': {e}")
 
 
-def cli():
+def cli() -> None:
     """
     Publish message to Pulsar broker.
     """
@@ -84,16 +80,13 @@ def cli():
         harvested_dict = json.load(f)
         harvested_dict["bucket_name"] = os.getenv("BUCKET_NAME", "")
         harvested_dict["added_keys"] = [
-            added_key.replace("{ROOT_KEY_PATH}", ROOT_KEY_PATH)
-            for added_key in harvested_dict["added_keys"]
+            added_key.replace("{ROOT_KEY_PATH}", ROOT_KEY_PATH) for added_key in harvested_dict["added_keys"]
         ]
         harvested_dict["updated_keys"] = [
-            updated_key.replace("{ROOT_KEY_PATH}", ROOT_KEY_PATH)
-            for updated_key in harvested_dict["updated_keys"]
+            updated_key.replace("{ROOT_KEY_PATH}", ROOT_KEY_PATH) for updated_key in harvested_dict["updated_keys"]
         ]
         harvested_dict["deleted_keys"] = [
-            deleted_key.replace("{ROOT_KEY_PATH}", ROOT_KEY_PATH)
-            for deleted_key in harvested_dict["deleted_keys"]
+            deleted_key.replace("{ROOT_KEY_PATH}", ROOT_KEY_PATH) for deleted_key in harvested_dict["deleted_keys"]
         ]
     harvested_string = json.dumps(harvested_dict)
 

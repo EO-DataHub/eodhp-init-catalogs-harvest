@@ -1,18 +1,21 @@
-FROM python:3.11-slim
+# syntax=docker/dockerfile:1
+FROM ghcr.io/astral-sh/uv:python3.13-trixie-slim
 
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    --mount=type=cache,target=/var/lib/apt,sharing=locked \
-    apt-get update && \
-    apt-get -y upgrade
+ENV UV_NO_DEV=1
 
 WORKDIR /app
 
-COPY data /app/data
+# Install dependencies
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-install-project
 
-COPY requirements.txt /app
+# Copy project files
+COPY . /app
 
-RUN --mount=type=cache,target=/root/.cache/pip python -m pip install -r requirements.txt
+# Sync the project
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen
 
-COPY /init_catalogs /app/init_catalogs
-
-CMD ["python", "-m", "init_catalogs"]
+CMD ["uv", "run", "--no-sync", "python", "-m", "init_catalogs"]
